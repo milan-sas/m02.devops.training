@@ -54,3 +54,5 @@ blocks:
           commands:
             - cd 7-test-coverage
             - pytest
+            - coverage run -m pytest test_calculator.py
+            - coverage report -m
