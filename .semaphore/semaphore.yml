@@ -51,4 +51,6 @@ blocks:
     task:
       jobs:
         - name: 'Job #1'
-          commands: []
+          commands:
+            - cd 7-test-coverage
+            - python -m pytest test_calculator.py -v
