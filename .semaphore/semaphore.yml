@@ -36,7 +36,7 @@ blocks:
           commands:
             - cd 3-integration-testing
             - pytest
-            - cd /../6-mocking
+            - cd ../6-mocking
             - pytest
   - name: 'End-to-end tests '
     dependencies:
