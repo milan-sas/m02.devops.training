@@ -57,3 +57,4 @@ blocks:
             - coverage run -m pytest test_calculator.py
             - coverage report -m
             - coverage html
+            - artifact push workflow html
