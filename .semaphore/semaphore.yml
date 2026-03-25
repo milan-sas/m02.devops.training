@@ -47,8 +47,6 @@ blocks:
           commands:
             - cd 4-e2e
             - pytest
-    skip:
-      when: branch = 'setup-semaphore'
   - name: Test coverage
     dependencies:
       - 'End-to-end tests '
