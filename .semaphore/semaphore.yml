@@ -16,7 +16,7 @@ global_job_config:
   prologue:
     commands:
       - checkout
-      - pip install pytest requests flask coverage locust coverage
+      - pip install pytest requests flask coverage locust
       - 'export PATH=$PATH:/home/semaphore/.local/bin'
 blocks:
   - name: cd 1-tdd
@@ -53,8 +53,7 @@ blocks:
         - name: 'Job #1'
           commands:
             - cd 7-test-coverage
-            - pytest
-            - coverage run -m pytest test_calculator.py
+            - coverage run -m pytest
             - coverage report -m
             - coverage html
             - artifact push workflow htmlcov
