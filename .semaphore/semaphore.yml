@@ -71,8 +71,9 @@ blocks:
 after_pipeline:
   task:
     jobs:
-      - name: 'Job #1'
-        commands: []
+      - name: Report Generation
+        commands:
+          - test-results gen-pipeline-report
 promotions:
   - name: Promotion 1
     pipeline_file: pipeline_2.yml
