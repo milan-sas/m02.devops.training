@@ -47,21 +47,22 @@ blocks:
           commands:
             - cd 4-e2e
             - pytest
-  - name: Test coverage
+  - name: Reports
+    dependencies:
+      - Code coverage
+    task:
+      jobs:
+        - name: Test reports
+          commands:
+            - cd 5-test-reports
+            - pytest --junitxml=reports.xml
+            - '[[ -f report.xml ]] && test-results publish report.xml'
+  - name: Code coverage
     dependencies:
       - 'End-to-end tests '
     task:
       jobs:
-        - name: Coverage
-          commands:
-            - cd 4-e2e
-            - pytest
-  - name: 'Block #5'
-    dependencies:
-      - Test coverage
-    task:
-      jobs:
-        - name: 'Job #1'
+        - name: Create code coverage
           commands:
             - cd 7-test-coverage
             - coverage run -m pytest
