@@ -19,41 +19,53 @@ global_job_config:
       - pip install pytest requests flask coverage locust
       - 'export PATH=$PATH:/home/semaphore/.local/bin'
 blocks:
-  - name: cd 1-tdd
+  - name: TDD Tests
     dependencies: []
     task:
       jobs:
-        - name: 'Job #1'
+        - name: TDD
           commands:
             - cd 1-tdd
             - pytest
-  - name: 'Block #2'
+  - name: Integration Testing
     dependencies:
-      - cd 1-tdd
+      - TDD Tests
     task:
       jobs:
-        - name: 'Job #1'
+        - name: Integration
           commands:
             - cd 3-integration-testing
             - pytest
-  - name: 'Block #3'
-    dependencies:
-      - 'Block #2'
-    task:
-      jobs:
-        - name: 'Job #1'
-          commands:
             - cd 6-mocking
             - pytest
-  - name: 'Block #4'
+  - name: 'End-to-end tests '
     dependencies:
-      - 'Block #3'
+      - Integration Testing
     task:
       jobs:
-        - name: 'Job #1'
+        - name: E2E
+          commands:
+            - cd 4-e2e
+            - pytest
+    skip:
+      when: branch = 'setup-semaphore'
+  - name: Test coverage
+    dependencies:
+      - 'End-to-end tests '
+    task:
+      jobs:
+        - name: Coverage
           commands:
             - cd 7-test-coverage
             - coverage run -m pytest
             - coverage report -m
             - coverage html
             - artifact push workflow htmlcov
+after_pipeline:
+  task:
+    jobs:
+      - name: 'Job #1'
+        commands: []
+promotions:
+  - name: Promotion 1
+    pipeline_file: pipeline_2.yml
