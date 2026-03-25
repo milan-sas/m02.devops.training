@@ -57,4 +57,4 @@ blocks:
             - coverage run -m pytest test_calculator.py
             - coverage report -m
             - coverage html
-            - artifact push workflow html
+            - "artifact push workflow ///home/semaphore/m02.devops.training/7-test-coverage/htmlcov/index.html\ahtmlcov/index.html\e"
