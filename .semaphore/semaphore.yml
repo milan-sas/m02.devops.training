@@ -27,3 +27,12 @@ blocks:
           commands:
             - cd 1-tdd
             - pytest
+  - name: 'Block #2'
+    dependencies:
+      - cd 1-tdd
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - cd 3-integration-testing
+            - pytest
