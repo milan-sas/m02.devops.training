@@ -54,6 +54,15 @@ blocks:
       jobs:
         - name: Coverage
           commands:
+            - cd 4-e2e
+            - pytest
+  - name: 'Block #5'
+    dependencies:
+      - 'Block #4'
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
             - cd 7-test-coverage
             - coverage run -m pytest
             - coverage report -m
