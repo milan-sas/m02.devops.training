@@ -36,3 +36,12 @@ blocks:
           commands:
             - cd 3-integration-testing
             - pytest
+  - name: 'Block #3'
+    dependencies:
+      - 'Block #2'
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - cd 6-mocking
+            - pytest
