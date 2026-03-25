@@ -58,7 +58,7 @@ blocks:
             - pytest
   - name: 'Block #5'
     dependencies:
-      - 'Block #4'
+      - Test coverage
     task:
       jobs:
         - name: 'Job #1'
