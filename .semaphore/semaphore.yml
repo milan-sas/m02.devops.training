@@ -56,8 +56,12 @@ blocks:
           commands:
             - cd 5-test-reports
             - pip install -r requirements.txt
-            - pytest --junitxml=reports.xml || true
-            - test-results publish reports.xml
+            - pytest --junitxml=reports.xml
+          epilogue:
+            always:
+              commands:
+                - cd 5-test-reports
+                - test-results publish reports.xml
   - name: Code coverage
     dependencies:
       - 'End-to-end tests '
