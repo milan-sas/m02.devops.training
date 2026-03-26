@@ -56,7 +56,7 @@ blocks:
           commands:
             - cd 5-test-reports
             - pip install -r requirements.txt
-            - pytest --junitxml=reports.xml
+            - pytest --junitxml=reports.xml && test-results publish report.xml
   - name: Code coverage
     dependencies:
       - 'End-to-end tests '
