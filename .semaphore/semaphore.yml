@@ -17,7 +17,7 @@ global_job_config:
     commands:
       - checkout
       - cache restore pip-$(checksum requirements.txt)
-      - pip install --quiet pytest requests flask coverage locust
+      - pip install --quiet pytest requests flask coverage locust flask
       - cache store pip-$(checksum requirements.txt) ~/.cache/pip
       - 'export PATH=$PATH:/home/semaphore/.local/bin'
 blocks:
