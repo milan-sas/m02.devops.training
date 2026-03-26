@@ -56,12 +56,9 @@ blocks:
           commands:
             - cd 5-test-reports
             - pip install -r requirements.txt
-            - pytest --junitxml=reports.xml
-      epilogue:
-        always:
-          commands:
-            - cd 5-test-reports
+            - pytest --junitxml=reports.xml || export PYTEST_FAILED=1
             - test-results publish reports.xml
+            - exit ${PYTEST_FAILED:-0}
   - name: Code coverage
     dependencies:
       - 'End-to-end tests '
