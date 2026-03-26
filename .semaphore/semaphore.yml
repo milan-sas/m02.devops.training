@@ -34,10 +34,7 @@ blocks:
       jobs:
         - name: Integration
           commands:
-            - cd 3-integration-testing
-            - pytest
-            - cd ../6-mocking
-            - pytest
+            - cd 3-integration-testing && python -m pytest test_integration.py -v
   - name: 'End-to-end tests '
     dependencies:
       - Integration Testing
@@ -45,8 +42,9 @@ blocks:
       jobs:
         - name: E2E
           commands:
-            - cd 4-e2e
-            - pytest
+            - cd 4-e2e && nohup python app.py &
+            - sleep 3
+            - python -m pytest test_e2e.py -v
   - name: Reports
     dependencies:
       - Code coverage
@@ -66,10 +64,8 @@ blocks:
         - name: Create code coverage
           commands:
             - cd 7-test-coverage
-            - coverage run -m pytest
+            - coverage run -m pytest test_calculator.py -v
             - coverage report -m
-            - coverage html
-            - artifact push workflow htmlcov
 after_pipeline:
   task:
     jobs:
