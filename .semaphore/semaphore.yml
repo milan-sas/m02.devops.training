@@ -47,7 +47,7 @@ blocks:
       jobs:
         - name: E2E
           commands:
-            - cd 4-e2e && nohup python app.py &​
+            - cd 4-e2e && python app.py &​
             - sleep 3​
             - python -m pytest test_e2e.py -v
   - name: Code Coverage
