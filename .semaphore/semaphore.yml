@@ -57,7 +57,6 @@ blocks:
             - cd 5-test-reports
             - pip install -r requirements.txt
             - pytest --junitxml=reports.xml
-            - artifact push workflow test-results
   - name: Code coverage
     dependencies:
       - 'End-to-end tests '
