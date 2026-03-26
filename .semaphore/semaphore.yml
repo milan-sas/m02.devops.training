@@ -17,7 +17,7 @@ global_job_config:
     commands:
       - checkout
       - cache restore pip-$(checksum requirements.txt)
-      - pip install --quiet pytest requests flask coverage locust flask
+      - pip install --quiet pytest requests flask coverage locust
       - cache store pip-$(checksum requirements.txt) ~/.cache/pip
       - 'export PATH=$PATH:/home/semaphore/.local/bin'
 blocks:
@@ -47,9 +47,8 @@ blocks:
       jobs:
         - name: E2E
           commands:
-            - cd 4-e2e && python app.py &​
-            - sleep 3​
-            - python -m pytest test_e2e.py -v
+            - cd 4-e2e
+            - pytest
   - name: Code Coverage
     dependencies:
       - End-to-end tests
@@ -76,6 +75,7 @@ blocks:
             - test-results publish --name "Test Reports" reports.xml
             - artifact push workflow reports.xml
             - exit $(cat pytest_exit_code)
+            - echo hello
 after_pipeline:
   task:
     jobs:
