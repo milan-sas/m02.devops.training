@@ -17,7 +17,7 @@ global_job_config:
     commands:
       - checkout
       - cache restore pip-$(checksum requirements.txt)
-      - pip install --quiet pytest requests flask coverage locust
+      - python3 -m pip install --quiet pytest requests flask coverage locust
       - cache store pip-$(checksum requirements.txt) ~/.cache/pip
       - 'export PATH=$PATH:/home/semaphore/.local/bin'
 blocks:
@@ -47,8 +47,9 @@ blocks:
       jobs:
         - name: E2E
           commands:
-            - cd 4-e2e && nohup python3 app.py &
+            - cd 4-e2e && nohup python3 app.py > /tmp/flask.log 2>&1 &
             - sleep 3
+            - cat /tmp/flask.log
             - cd 4-e2e && pytest test_e2e.py -v
   - name: Code Coverage
     dependencies:
