@@ -77,7 +77,7 @@ blocks:
             - test-results publish --name "Test Reports" reports.xml
             - artifact push workflow reports.xml
             - exit $(cat pytest_exit_code)
-            - echo hello
+            - echo hello1
 after_pipeline:
   task:
     jobs:
