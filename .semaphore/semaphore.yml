@@ -73,9 +73,10 @@ blocks:
           commands:
             - cd 5-test-reports
             - pip install -r requirements.txt
-            - pytest --junitxml=reports.xml;
+            - pytest --junitxml=reports.xml; echo $? > pytest_exit_code
             - test-results publish --name "Test Reports" reports.xml
             - artifact push workflow reports.xml
+            - exit $(cat pytest_exit_code)
 after_pipeline:
   task:
     jobs:
